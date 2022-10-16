@@ -1,0 +1,480 @@
+{
+	"info": {
+		"_postman_id": "2c74d0cc-71d7-4f99-aa9d-546a7d769c9f",
+		"name": "Sharing Vision BE Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Article",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/article",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List Article",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/article",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"article"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "620"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"26c-qaDcc105Py+DRIqAnrZVt1O6IhI\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Oct 2022 06:02:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"title\": \"Growing out Plant\",\n            \"content\": \"lorem ipsum dolot si amet\",\n            \"category\": \"gardening\",\n            \"status\": \"Publish\"\n        },\n        {\n            \"title\": \"Tes add valdiation ENDPOINT\",\n            \"content\": \" content\",\n            \"category\": \"failure never will\",\n            \"status\": \"Publish\"\n        },\n        {\n            \"title\": \"Tes edit valdiation ENDPOINT\",\n            \"content\": \" content xxxxasdahsdjhabsdkjnakjsdklasndkasdasdasdasd asdasdas asdasd asda dasdwqe asdhikwbdkjasdoqwi opjilsafdijasbkdhj iaushdkjandjkasbd kjabsdjhkbashjd  alsidnakjbdjhabdjh iadjkasbdjkhbakjdhb iaysdbjhkabdjhasbskd akjhsdbajkhbdjhasbkjdkywqieu auidhjkabdjkha\",\n            \"category\": \"failure never will\",\n            \"status\": \"Trash\"\n        }\n    ],\n    \"success\": true,\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Article By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3001/article/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"article",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Article By ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3001/article/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"article",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "396"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"18c-oJLDzlIa1ZHS/i5v5cgCScEyIqg\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Oct 2022 06:05:15 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"title\": \"Tes edit valdiation ENDPOINT\",\n        \"content\": \" content xxxxasdahsdjhabsdkjnakjsdklasndkasdasdasdasd asdasdas asdasd asda dasdwqe asdhikwbdkjasdoqwi opjilsafdijasbkdhj iaushdkjandjkasbd kjabsdjhkbashjd  alsidnakjbdjhabdjh iadjkasbdjkhbakjdhb iaysdbjhkabdjhasbskd akjhsdbajkhbdjhasbkjdkywqieu auidhjkabdjkha\",\n        \"category\": \"failure never will\",\n        \"status\": \"Trash\"\n    },\n    \"success\": true,\n    \"code\": 200\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Judul adalah lorem ipsum \",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu\",\n    \"category\": \"custom\",\n    \"status\": \"Trash\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/article",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add Article",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Judul adalah lorem ipsum \",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu\",\n    \"category\": \"custom\",\n    \"status\": \"Trash\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/article",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"article"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "52"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"34-PaN3mtnKwSxKCkPFdKMkf3NmO/E\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Oct 2022 06:07:44 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"success add data\",\n    \"success\": true,\n    \"code\": 201\n}"
+				}
+			]
+		},
+		{
+			"name": "Edit Article",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Judul adalah editan lorem ipsum \",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu\",\n    \"category\": \"custom\",\n    \"status\": \"Publish\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/article/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"article",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Edit Article",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Judul adalah editan lorem ipsum \",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu\",\n    \"category\": \"custom\",\n    \"status\": \"Publish\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/article/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"article",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"38-OBI7ZiUKmKuGjxVzXbsidkixxq4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Oct 2022 06:08:46 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"code\": 201,\n    \"msg\": \"Success edit article\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Article",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Judul adalah editan lorem ipsum \",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu\",\n    \"category\": \"custom\",\n    \"status\": \"Publish\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/article/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"article",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete Article",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Judul adalah editan lorem ipsum \",\n    \"content\": \"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec qu\",\n    \"category\": \"custom\",\n    \"status\": \"Publish\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3001/article/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"article",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "58"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3a-jh5CJN+58nRFWMW6SGpI/gH3tjA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 16 Oct 2022 06:10:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"msg\": \"Success delete article\"\n}"
+				}
+			]
+		}
+	]
+}
