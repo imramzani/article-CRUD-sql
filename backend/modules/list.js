@@ -4,6 +4,7 @@ const {Op} = require('sequelize')
 module.exports = async function(req, res, next){
   const {limit, offset, status} = req.query
   let option = {
+    order: [["updatedAt", "ASC"]],
     limit: limit || 10,
     offset: offset || 0,
     attributes: {

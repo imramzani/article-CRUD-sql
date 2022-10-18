@@ -5,16 +5,17 @@ import {
   CCardBody,
   CCardHeader,
   CTable,
-  CAvatar,
   CTableHead,
   CTableBody,
   CTableDataCell,
-  CProgress,
   CTableRow,
   CTableHeaderCell,
   CNav,
   CNavItem,
   CNavLink,
+  CModal,
+  CModalBody,
+  CModalHeader,
   CCol,
   CRow,
 } from '@coreui/react'
@@ -27,8 +28,17 @@ import ModalEdit from './ModalEditForm'
 
 const Cards = () => {
   const [articles, setArticles] = useState([])
+  const [visible, setVisible] = useState(false)
+  const [editForm, setEditForm] = useState(false)
+  const [limit, setLimit] = useState(10)
+  const [offset, setOffset] = useState(0)
+  const [stats, setStats] = useState('Publish')
   const [id, setId] = useState()
   const navigate = useNavigate()
+  let props = {
+    id,
+    setEditForm,
+  }
 
   const seeDetails = (id, e) => {
     e.preventDefault()
@@ -36,12 +46,9 @@ const Cards = () => {
   }
 
   useEffect(() => {
+    console.log(visible, editForm)
     listArticle()
-  }, [articles])
-
-  // useEffect(() => {
-
-  // }, articles)
+  }, [visible, editForm, offset, limit, stats])
 
   const deletePost = async (id, e) => {
     e.preventDefault()
@@ -51,10 +58,11 @@ const Cards = () => {
 
   const listArticle = async () => {
     await axios
-      .get('http://localhost:3001/article')
+      .get(`http://localhost:3001/article?status=${stats}&limit=${limit}&offset=${offset}`)
       .then((res) => {
         console.log(res.data)
         setArticles(res.data.data)
+        console.log(visible)
       })
       .catch((err) => {
         console.log(err)
@@ -62,58 +70,95 @@ const Cards = () => {
   }
 
   return (
-    <CRow>
-      <CCol xs={12}>
-        <CCard className="mb-4">
-          <CCardHeader>
-            <strong>Article List</strong>
-          </CCardHeader>
-          <CCardBody>
-            <div>{ModalAdd()}</div>
-            <CTable align="middle" className="mb-0 border" hover responsive>
-              <CTableHead color="light">
-                <CTableRow>
-                  <CTableHeaderCell className="text-center">No.</CTableHeaderCell>
-                  <CTableHeaderCell className="text-center">Title</CTableHeaderCell>
-                  <CTableHeaderCell className="text-center">Content</CTableHeaderCell>
-                  <CTableHeaderCell className="text-center">Category</CTableHeaderCell>
-                  <CTableHeaderCell className="text-center">Activity</CTableHeaderCell>
-                </CTableRow>
-              </CTableHead>
-              <CTableBody>
-                {articles.map((item, index) => (
-                  <CTableRow v-for="item in tableItems" key={index}>
-                    <CTableDataCell className="text-center">{index + 1}</CTableDataCell>
-                    <CTableDataCell>
-                      <div className="clearfix">
-                        <div className="float-start">
-                          <strong>{item.title}</strong>
-                        </div>
-                      </div>
-                    </CTableDataCell>
-                    <CTableDataCell className="justify-content">
-                      <div>{item.content}</div>
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center">
-                      <div>{item.category}</div>
-                    </CTableDataCell>
-                    <CTableDataCell className="text-center">
-                      <CButton color="info" onClick={(e) => seeDetails(item.id, e)}>
-                        Edit
-                      </CButton>
-                      {/* {ModalEdit(item.id, item.title, item.category, item.content, item.status)} */}
-                      <CButton color="danger" onClick={(e) => deletePost(item.id, e)}>
-                        Delete
-                      </CButton>
-                    </CTableDataCell>
+    <>
+      <CRow>
+        <CCol xs={12}>
+          <CCard className="mb-4">
+            <CCardHeader>
+              <strong>Article List</strong>
+            </CCardHeader>
+            <CCardBody>
+              {/* <div>{ModalAdd()}</div> */}
+              <CNav variant="tabs">
+                <CNavItem>
+                  <CNavLink onClick={() => setStats('Publish')}>Published</CNavLink>
+                </CNavItem>
+                <CNavItem>
+                  <CNavLink onClick={() => setStats('Draft')}>Draft</CNavLink>
+                </CNavItem>
+                <CNavItem>
+                  <CNavLink onClick={() => setStats('Trash')}>Trashed</CNavLink>
+                </CNavItem>
+              </CNav>
+              <CTable align="middle" className="mb-0 border" hover responsive>
+                <CTableHead color="light">
+                  <CTableRow>
+                    <CTableHeaderCell className="text-center">No.</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Title</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Content</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Category</CTableHeaderCell>
+                    <CTableHeaderCell className="text-center">Activity</CTableHeaderCell>
                   </CTableRow>
-                ))}
-              </CTableBody>
-            </CTable>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+                </CTableHead>
+                <CTableBody>
+                  {articles.map((item, index) => (
+                    <CTableRow v-for="item in tableItems" key={index}>
+                      <CTableDataCell className="text-center">{index + 1}</CTableDataCell>
+                      <CTableDataCell>
+                        <div className="clearfix">
+                          <div className="float-start">
+                            <strong>{item.title}</strong>
+                          </div>
+                        </div>
+                      </CTableDataCell>
+                      <CTableDataCell className="justify-content">
+                        <div>{item.content}</div>
+                      </CTableDataCell>
+                      <CTableDataCell className="text-center">
+                        <div>{item.category}</div>
+                      </CTableDataCell>
+                      <CTableDataCell className="text-center">
+                        <CButton
+                          color="info"
+                          onClick={() => {
+                            setId(item.id)
+                            setEditForm(!editForm)
+                          }}
+                        >
+                          Edit
+                        </CButton>
+                        {/* {ModalEdit(item)} */}
+                        <CButton color="danger" onClick={(e) => deletePost(item.id, e)}>
+                          Delete
+                        </CButton>
+                      </CTableDataCell>
+                    </CTableRow>
+                  ))}
+                </CTableBody>
+              </CTable>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+      <CButton onClick={() => setVisible(!visible)}>New Article</CButton>
+      <CModal backdrop="static" visible={visible}>
+        <CModalHeader />
+        <CModalBody>
+          <ModalAdd passToChild={setVisible} />
+        </CModalBody>
+      </CModal>
+      <CModal backdrop="static" visible={editForm}>
+        <CModalHeader />
+        <CModalBody>
+          <ModalEdit
+            passToChild={props}
+            onClose={() => {
+              setEditForm(!editForm)
+            }}
+          />
+        </CModalBody>
+      </CModal>
+    </>
   )
 }
 
